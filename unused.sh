@@ -15,7 +15,7 @@ do
   # Loop through the list of disks and check if they are in use
   for DISK in $DISK_LIST
   do
-    IN_USE=$(gcloud compute instances describe $INSTANCE --project $PROJECT_ID --format="value(disks[].users)" --filter="disks[].source=$DISK")
+    IN_USE=$(gcloud compute disks describe $DISK --project $PROJECT_ID --format="value(users)")
     if [ -z "$IN_USE" ]
     then
       # If the disk is not in use, print the instance name and disk name to a CSV file
